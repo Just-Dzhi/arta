@@ -1,0 +1,29 @@
+[
+    {
+        "name": "help",
+        "description": "Show info about Arta"
+    },
+    {
+        "name": "embed",
+        "description": "Create a decoration message",
+        "options": [
+            {
+                "name": "title",
+                "description": "Title of your embed message",
+                "type": 3,
+                "required": true
+            },
+            {
+                "name": "description",
+                "description": "Main text in your embed message. Newline supported.",
+                "type": 3,
+                "required": true
+            },
+            {
+                "name": "ephemeral",
+                "description": "Who can see this embed? true - only you / false - everyone",
+                "type": 5
+            }
+        ]
+    }
+]

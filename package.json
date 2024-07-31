@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "launch": "node ./dist/main.js"
+    "launch": "node ./dist/main.js",
+    "register": "node ./dist/commands/registerCommands.js"
   },
   "author": "G",
   "license": "MIT",
