@@ -4,3 +4,5 @@
 .env
 llama.log
 *.gguf
+*.bat
+modelPrompt.bat
