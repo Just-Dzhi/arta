@@ -5,3 +5,4 @@
 llama.log
 *.gguf
 *.bat
+reactions.json
