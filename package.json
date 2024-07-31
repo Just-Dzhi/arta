@@ -7,6 +7,7 @@
   "scripts": {
     "build": "tsc",
     "launch": "node ./dist/main.js",
+    "start": "npm run build && npm run launch",
     "register": "node ./dist/commands/registerCommands.js"
   },
   "author": "G",
