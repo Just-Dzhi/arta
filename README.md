@@ -24,6 +24,8 @@ Simple discord bot with AI and commands ^^
 
 ---
 
+![conversation](./conversation.png)
+
 # llama.cpp backend
 
 The key feature of this bot is support for llama.cpp and launching LLM models, with which you can communicate simply by pinging the bot in discord.
@@ -43,3 +45,5 @@ Honestly, it is difficult for me to correctly describe all the installation step
 4. You can modify arta/modelPrompt.txt to change the model behavior. Want a penguin? Write about it. Want a llama? Write about it. Want a cute girl? Write about it.
 
 5. Run the script that will launch llama-server and ping the bot on the server by writing something to it, it will answer you.
+
+---
