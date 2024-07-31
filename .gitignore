@@ -5,4 +5,4 @@
 llama.log
 *.gguf
 *.bat
-modelPrompt.bat
+modelPrompt.txt
