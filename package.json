@@ -12,6 +12,10 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^22.0.1",
+    "dotenv": "^16.4.5",
     "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "discord.js": "^14.15.3"
   }
 }
