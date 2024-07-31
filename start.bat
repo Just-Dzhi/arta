@@ -1,1 +1,0 @@
-.\llama.cpp\llama-server -m qwen2.7b.qwen2-multilingual-rp.gguf_v2.q4_k_m.gguf -ngl 24 --mlock --ctx-size 2048 --temp 0.6 --repeat-penalty 1.2 --repeat-last-n 128 --top-k 50 --top-p 0.9 --min-p 0.1 --typical 0.9
