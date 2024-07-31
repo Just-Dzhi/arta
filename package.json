@@ -18,6 +18,7 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
-    "discord.js": "^14.15.3"
+    "discord.js": "^14.15.3",
+    "modelfusion": "^0.137.0"
   }
 }
