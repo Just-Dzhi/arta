@@ -25,5 +25,29 @@
                 "type": 5
             }
         ]
+    },
+    {
+        "name": "set_role",
+        "description": "Add role to message.",
+        "options": [
+            {
+                "name": "message_id",
+                "description": "Message id",
+                "type": 3,
+                "required": true
+            },
+            {
+                "name": "emoji",
+                "description": "Pick emoji",
+                "type": 3,
+                "required": true
+            },
+            {
+                "name": "role",
+                "description": "Pick role",
+                "type": 8,
+                "required": true
+            }
+        ]
     }
 ]

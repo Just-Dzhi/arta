@@ -14,11 +14,11 @@ async function createEmbed(interaction: CommandInteraction): Promise<void> {
             await interaction.reply(embed(title, formattedDescription, ephemeral ?? false));
         } else {
             await interaction.reply(ir(`Title or description is missing!`, true));
-        }
+        };
     } catch (error) {
         logError(error);
         await interaction.reply(ir(`I'm sleeping and will answer later~`, true));
-    }
-}
+    };
+};
 
 export { createEmbed };
