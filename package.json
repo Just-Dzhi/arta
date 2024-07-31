@@ -1,0 +1,17 @@
+{
+  "name": "arta",
+  "version": "1.0.0",
+  "description": "Simple discord bot with AI and commands ^^",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "launch": "node ./dist/main.js"
+  },
+  "author": "G",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.0.1",
+    "typescript": "^5.5.4"
+  }
+}

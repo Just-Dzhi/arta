@@ -1,2 +1,6 @@
 # arta
 Simple discord bot with AI and commands ^^
+
+![arta](./arta.jpg)
+
+---
