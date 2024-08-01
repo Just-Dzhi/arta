@@ -42,7 +42,7 @@ Honestly, it is difficult for me to correctly describe all the installation step
     You can read more about launch parameters here:
     https://github.com/ggerganov/llama.cpp/blob/master/examples/main/README.md
 
-4. You can modify arta/modelPrompt.txt to change the model behavior. Want a penguin? Write about it. Want a llama? Write about it. Want a cute girl? Write about it.
+4. You can modify ./src/modelPrompt.txt to change the model behavior. Want a penguin? Write about it. Want a llama? Write about it. Want a cute girl? Write about it.
 
 5. Run the script that will launch llama-server and ping the bot on the server by writing something to it, it will answer you.
 
