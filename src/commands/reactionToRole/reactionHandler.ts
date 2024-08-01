@@ -13,9 +13,12 @@ const loadConfig = (): void => {
     };
 };
 
-client.on('messageReactionAdd', async (reaction: MessageReaction, user: User): Promise<void> => {
+client.once('ready', () => {
+    loadConfig();
+});
+
+const handleReaction = async (reaction: MessageReaction, user: User, addRole: boolean): Promise<void> => {
     if (user.bot) return;
-    if (!config) loadConfig();
 
     const { message } = reaction;
     if (!message.guild) return;
@@ -26,35 +29,19 @@ client.on('messageReactionAdd', async (reaction: MessageReaction, user: User): P
             const member = await message.guild.members.fetch(user.id);
             const role = message.guild.roles.cache.get(roleId);
             if (role) {
-                await member.roles.add(role);
+                if (addRole) {
+                    await member.roles.add(role);
+                } else {
+                    await member.roles.remove(role);
+                };
             } else {
                 console.warn(`Role with ID ${roleId} not found.`);
             };
         } catch (error) {
-            console.error(`Error adding role ${roleId} to user ${user.tag}: ${error}`);
+            console.error(`Error ${addRole ? 'adding' : 'removing'} role ${roleId} to user ${user.tag}: ${error}`);
         };
     };
-});
+};
 
-client.on('messageReactionRemove', async (reaction: MessageReaction, user: User): Promise<void> => {
-    if (user.bot) return;
-    if (!config) loadConfig();
-
-    const { message } = reaction;
-    if (!message.guild) return;
-
-    const roleId = config.messages[message.id]?.[reaction.emoji.name ?? ''];
-    if (roleId) {
-        try {
-            const member = await message.guild.members.fetch(user.id);
-            const role = message.guild.roles.cache.get(roleId);
-            if (role) {
-                await member.roles.remove(role);
-            } else {
-                console.warn(`Role with ID ${roleId} not found.`);
-            };
-        } catch (error) {
-            console.error(`Error removing role ${roleId} from user ${user.tag}: ${error}`);
-        };
-    };
-});
+client.on('messageReactionAdd', (reaction: MessageReaction, user: User) => handleReaction(reaction, user, true));
+client.on('messageReactionRemove', (reaction: MessageReaction, user: User) => handleReaction(reaction, user, false));

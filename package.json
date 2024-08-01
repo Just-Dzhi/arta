@@ -8,7 +8,8 @@
     "build": "tsc",
     "launch": "node ./dist/main.js",
     "start": "npm run build && npm run launch",
-    "register": "node ./dist/commands/registerCommands.js"
+    "register": "node ./dist/commands/registerCommands.js",
+    "serve": "start start.bat"
   },
   "author": "G",
   "license": "MIT",

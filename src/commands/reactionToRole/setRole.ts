@@ -1,5 +1,6 @@
 import { CommandInteraction, CommandInteractionOptionResolver, TextChannel } from 'discord.js';
 import { getReactions, saveReactions } from './reactions.js';
+import { ir } from '../../utils/utils.js';
 
 async function setRole(interaction: CommandInteraction): Promise<void> {
     try {
@@ -18,11 +19,10 @@ async function setRole(interaction: CommandInteraction): Promise<void> {
 
         getReactions.messages[messageId][emoji] = roleName.id;
         saveReactions(getReactions);
-
-        await interaction.reply('Ready!');
+        interaction.reply(ir('Ready', true));
     } catch (error) {
+        interaction.reply(ir('Error', true));
         console.error(error);
-        await interaction.reply('Error');
     };
 };
 
