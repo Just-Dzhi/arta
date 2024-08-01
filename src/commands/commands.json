@@ -49,5 +49,9 @@
                 "required": true
             }
         ]
+    },
+    {
+        "name": "clear_all_roles",
+        "description": "Delete all roles from messages"
     }
 ]
