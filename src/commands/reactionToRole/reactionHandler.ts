@@ -16,7 +16,7 @@ const updateRole = async (member: GuildMember, roleId: string, addRole: boolean)
         }
     } catch (error) {
         console.error(`Error ${addRole ? 'adding' : 'removing'} role ${roleId} to user ${member.user.tag}: ${error}`);
-    }
+    };
 };
 
 const handleReaction = async (reaction: MessageReaction, user: User, addRole: boolean): Promise<void> => {
@@ -30,11 +30,11 @@ const handleReaction = async (reaction: MessageReaction, user: User, addRole: bo
             const member = await reaction.message.guild.members.fetch(user.id);
             if (member) {
                 await updateRole(member, roleId, addRole);
-            }
+            };
         } catch (error) {
             console.error(`Error fetching member or updating role: ${error}`);
-        }
-    }
+        };
+    };
 };
 
 client.on('messageReactionAdd', async (reaction: MessageReaction, user: User) => {
@@ -55,12 +55,12 @@ const addReactionsToMessages = async () => {
             if (message) {
                 for (const emoji of Object.keys(emojis)) {
                     await message.react(emoji);
-                }
-            }
-        }
+                };
+            };
+        };
     } catch (error) {
         console.error('Error adding reactions to messages:', error);
-    }
+    };
 };
 
 const fetchMessageById = async (messageId: string) => {
@@ -70,9 +70,9 @@ const fetchMessageById = async (messageId: string) => {
                 return await channel.messages.fetch(messageId);
             } catch {
                 // Continue to the next channel if message is not found
-            }
-        }
-    }
+            };
+        };
+    };
     return null;
 };
 

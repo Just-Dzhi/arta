@@ -1,6 +1,6 @@
 import { CommandInteraction, CommandInteractionOptionResolver, TextChannel } from 'discord.js';
 import { loadReactions, saveReactions } from './reactions.js';
-import { ir } from '../../utils/utils.js';
+import { ir, logError } from '../../utils/utils.js';
 
 const reactionsConfig = loadReactions();
 
@@ -15,11 +15,11 @@ const setRole = async (interaction: CommandInteraction): Promise<void> => {
         if (!messageId || !emoji || !role) {
             await interaction.reply(ir('Invalid input', true));
             return;
-        }
+        };
 
         if (!reactionsConfig.messages[messageId]) {
             reactionsConfig.messages[messageId] = {};
-        }
+        };
 
         const message = await (interaction.channel as TextChannel).messages.fetch(messageId);
         await message.react(emoji);
@@ -30,8 +30,8 @@ const setRole = async (interaction: CommandInteraction): Promise<void> => {
         await interaction.reply(ir('Role set successfully', true));
     } catch (error) {
         await interaction.reply(ir('Error setting role', true));
-        console.error(error);
-    }
+        logError(error);
+    };
 };
 
 export { setRole };
