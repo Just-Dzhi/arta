@@ -20,7 +20,7 @@ async function handleModelResponse(message: Message) {
                 stopSequences: ["<|stop|>"],
             }).withChatPrompt(),
             prompt: {
-                system: fs.readFileSync('./modelPrompt.txt', 'utf-8'),
+                system: fs.readFileSync('./src/modelPrompt.txt', 'utf-8'),
                 messages: getConversationContext(userId)
             }
         });
