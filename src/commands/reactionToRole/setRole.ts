@@ -1,29 +1,37 @@
 import { CommandInteraction, CommandInteractionOptionResolver, TextChannel } from 'discord.js';
-import { getReactions, saveReactions } from './reactions.js';
+import { loadReactions, saveReactions } from './reactions.js';
 import { ir } from '../../utils/utils.js';
 
-async function setRole(interaction: CommandInteraction): Promise<void> {
+const reactionsConfig = loadReactions();
+
+const setRole = async (interaction: CommandInteraction): Promise<void> => {
     try {
         const options = interaction.options as CommandInteractionOptionResolver;
 
-        const messageId: string | null = options.getString('message_id');
-        const emoji: string | null = options.getString('emoji');
-        const roleName: any | null = options.getRole('role');
+        const messageId = options.getString('message_id');
+        const emoji = options.getString('emoji');
+        const role = options.getRole('role');
 
-        if (!getReactions.messages[messageId]) {
-            getReactions.messages[messageId] = {};
-        };
+        if (!messageId || !emoji || !role) {
+            await interaction.reply(ir('Invalid input', true));
+            return;
+        }
+
+        if (!reactionsConfig.messages[messageId]) {
+            reactionsConfig.messages[messageId] = {};
+        }
 
         const message = await (interaction.channel as TextChannel).messages.fetch(messageId);
         await message.react(emoji);
 
-        getReactions.messages[messageId][emoji] = roleName.id;
-        saveReactions(getReactions);
-        interaction.reply(ir('Ready', true));
+        reactionsConfig.messages[messageId][emoji] = role.id;
+        saveReactions(reactionsConfig);
+
+        await interaction.reply(ir('Role set successfully', true));
     } catch (error) {
-        interaction.reply(ir('Error', true));
+        await interaction.reply(ir('Error setting role', true));
         console.error(error);
-    };
+    }
 };
 
 export { setRole };

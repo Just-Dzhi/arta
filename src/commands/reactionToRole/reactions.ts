@@ -1,24 +1,27 @@
 import fs from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname, resolve } from 'path';
 
-const reactionsFilePath = ('./src/reactions.json');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const reactionsFilePath = resolve(__dirname, 'reactions.json');
 
 interface Reactions {
     messages: Record<string, Record<string, string>>;
 };
 
-function loadReactions(): Reactions {
+const loadReactions = (): Reactions => {
     if (fs.existsSync(reactionsFilePath)) {
         const data = fs.readFileSync(reactionsFilePath, 'utf-8');
         return JSON.parse(data);
     } else {
+        saveReactions({ messages: {} });
         return { messages: {} };
     };
 };
 
-function saveReactions(reactions: Reactions): void {
+const saveReactions = (reactions: Reactions): void => {
     fs.writeFileSync(reactionsFilePath, JSON.stringify(reactions, null, 2), 'utf-8');
 };
 
-const getReactions: Reactions = loadReactions();
-
-export { getReactions, saveReactions };
+export { loadReactions, saveReactions };
