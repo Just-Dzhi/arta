@@ -1,4 +1,4 @@
-import { CommandInteraction, CommandInteractionOptionResolver, TextChannel } from 'discord.js';
+import { CommandInteraction, CommandInteractionOptionResolver, TextChannel, PermissionsBitField } from 'discord.js';
 import { loadReactions, saveReactions } from './reactions.js';
 import { ir, logError } from '../../utils/utils.js';
 
@@ -6,6 +6,11 @@ const reactionsConfig = loadReactions();
 
 const setRole = async (interaction: CommandInteraction): Promise<void> => {
     try {
+        if (!interaction.memberPermissions?.has(PermissionsBitField.Flags.Administrator)) {
+            await interaction.reply(ir('You do not have permission to use this command :(', true));
+            return;
+        };
+
         const options = interaction.options as CommandInteractionOptionResolver;
 
         const messageId = options.getString('message_id');
