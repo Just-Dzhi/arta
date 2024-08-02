@@ -1,8 +1,9 @@
 import { client, clientMention } from './client.js';
 import { handleModelResponse } from './model.js';
 import { Message } from 'discord.js';
-import { User, addUser, getUser, updateUser } from './database.js';
+import { getUser, updateUser } from './database.js';
 import { getRandomNumber, logError } from './utils/systemUtils.js';
+import { addUserToDB } from './utils/addUserToDB.js';
 
 client.on('messageCreate', async (message: Message) => {
     if (message.author.id === client.user?.id) return;
@@ -18,21 +19,7 @@ async function handleUserExperience(message: Message) {
     let user = getUser(message.author.id);
 
     if (!user) {
-        const newUser: User = {
-            id: message.author.id,
-            username: message.author.username,
-            displayName: message.author.displayName,
-            xp: getRandomNumber(1, 5),
-            avatarURL: message.author.displayAvatarURL(),
-        };
-
-        try {
-            addUser(newUser);
-            user = newUser;
-        } catch (error) {
-            logError(error, `Error adding user ${newUser.username}`);
-            return;
-        };
+        user = addUserToDB(message);
     };
 
     user.xp += getRandomNumber(1, 5);
