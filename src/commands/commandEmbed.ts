@@ -1,9 +1,10 @@
-import { embed, logError, ir } from '../utils/utils.js';
+import { embed, ir, hasInteractionPermission  } from '../utils/utils.js';
+import { logError } from '../utils/systemUtils.js';
 import { CommandInteraction, CommandInteractionOptionResolver, PermissionsBitField } from 'discord.js';
 
 async function createEmbed(interaction: CommandInteraction): Promise<void> {
     try {
-        if (!interaction.memberPermissions?.has(PermissionsBitField.Flags.Administrator)) {
+        if (!hasInteractionPermission(interaction, PermissionsBitField.Flags.Administrator)) {
             await interaction.reply(ir('You do not have permission to use this command :(', true));
             return;
         };

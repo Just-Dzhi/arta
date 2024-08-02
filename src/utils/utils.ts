@@ -1,4 +1,4 @@
-import { EmbedBuilder } from 'discord.js';
+import { EmbedBuilder, TextChannel, CommandInteraction } from 'discord.js';
 import { client } from '../client.js';
 
 function embed(title = 'title', description = 'description', ephemeral = false, thumbnail = client.user.avatarURL()) {
@@ -19,20 +19,16 @@ function ir(content: string, ephemeral = false) {
     return { content: content, ephemeral: ephemeral };
 };
 
-function logError(error: Error, additionalInfo = ''): void {
-    console.log(`\n--------`);
-    console.error(`\nError: ${error.message}`);
-    if (additionalInfo) {
-        console.log(`\nAdditional info: ${additionalInfo}`);
-    };
-
-    const errorLocation = error.stack.split('\n')[1].trim();
-    console.log(`\nLocation: ${errorLocation}`);
-    console.log(`\n--------`);
+function hasPermission(userId: string, channel: TextChannel, permission: bigint): boolean {
+    const member = channel.guild.members.cache.get(userId);
+    if (!member) return false;
+    return member.permissions.has(permission);
 };
 
-function getRandomNumber(min: number, max: number): number {
-    return Math.floor(Math.random() * ((max + 1) - min) + min);
+function hasInteractionPermission(interaction: CommandInteraction, permission: bigint): boolean {
+    const channel = interaction.channel as TextChannel;
+    const user = interaction.user;
+    return hasPermission(user.id, channel, permission);
 };
 
-export { embed, ir, logError, getRandomNumber};
+export { embed, ir, hasInteractionPermission };

@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { generateText, llamacpp } from 'modelfusion';
-import { getConversationContext, addUserMessage, addAssistantMessage, initializeConversation } from './conversation.js';
-import { logError } from './utils/utils.js';
+import { getConversationContext, addUserMessage, addAssistantMessage, initializeConversation } from './utils/conversation.js';
+import { logError } from './utils/systemUtils.js';
 import { Message, TextChannel } from 'discord.js';
 
 async function handleModelResponse(message: Message) {

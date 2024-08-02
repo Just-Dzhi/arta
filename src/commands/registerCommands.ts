@@ -1,5 +1,5 @@
 import { REST, Routes } from 'discord.js';
-import { logError } from '../utils/utils.js';
+import { logError } from '../utils/systemUtils.js';
 import fs from 'fs';
 import 'dotenv/config';
 

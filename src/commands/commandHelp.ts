@@ -1,4 +1,5 @@
-import { ir, logError, embed } from '../utils/utils.js';
+import { ir, embed } from '../utils/utils.js';
+import { logError } from '../utils/systemUtils.js';
 import { CommandInteraction } from 'discord.js';
 
 async function help(interaction: CommandInteraction) {

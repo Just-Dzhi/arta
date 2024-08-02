@@ -1,6 +1,7 @@
 import { MessageReaction, User, GuildMember, TextChannel } from 'discord.js';
 import { loadReactions } from './reactions.js';
 import { client } from '../../client.js';
+import { logError } from '../../utils/systemUtils.js';
 
 const loadReactionsConfig = () => loadReactions();
 
@@ -15,7 +16,7 @@ const updateRole = async (member: GuildMember, roleId: string, addRole: boolean)
             }
         }
     } catch (error) {
-        console.error(`Error ${addRole ? 'adding' : 'removing'} role ${roleId} to user ${member.user.tag}: ${error}`);
+        logError(error, `Error ${addRole ? 'adding' : 'removing'} role ${roleId} to user ${member.user.tag}: ${error}`);
     };
 };
 
@@ -32,7 +33,7 @@ const handleReaction = async (reaction: MessageReaction, user: User, addRole: bo
                 await updateRole(member, roleId, addRole);
             };
         } catch (error) {
-            console.error(`Error fetching member or updating role: ${error}`);
+            logError(error, 'Error fetching member or updating role');
         };
     };
 };
@@ -59,7 +60,7 @@ const addReactionsToMessages = async () => {
             };
         };
     } catch (error) {
-        console.error('Error adding reactions to messages:', error);
+        logError(error, 'Error adding reactions to messages');
     };
 };
 
