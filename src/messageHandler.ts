@@ -35,8 +35,10 @@ async function handleUserExperience(message: Message) {
         };
     };
 
-    const xpGained = getRandomNumber(1, 5);
-    user.xp += xpGained;
+    user.xp += getRandomNumber(1, 5);
+    if (user.displayName != message.author.displayName) {
+        user.displayName = message.author.displayName;
+    };
 
     try {
         updateUser(user);
