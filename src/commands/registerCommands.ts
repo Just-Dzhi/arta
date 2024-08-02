@@ -24,3 +24,18 @@ async function refreshCommands() {
 };
 
 refreshCommands();
+
+/*
+ApplicationCommandOptionType
+1 - Subcommand
+2 - SubcommandGroup
+3 - String
+4 - Integer
+5 - Boolean
+6 - User
+7 - Channel
+8 - Role
+9 - Mentionable
+10 - Number
+11 - Attachment
+*/

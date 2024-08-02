@@ -1,7 +1,9 @@
 /node_modules
 /dist
 /llama.cpp
-.env
-llama.log
 *.gguf
 *.bat
+.env
+llama.log
+users.db
+

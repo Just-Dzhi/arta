@@ -19,4 +19,4 @@ function formatDate(timestamp: number) {
     return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
 };
 
-export { logError, getRandomNumber, formatDate }
+export { logError, getRandomNumber, formatDate };

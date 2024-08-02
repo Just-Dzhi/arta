@@ -8,6 +8,8 @@ async function help(interaction: CommandInteraction) {
         + `Hello! My name is Arta, you can talk to me by simply pinging me or replying to one of my messages.\n`
         + `\n**You can also use the following commands:**`
         + `\n1. /help - show info about Arta\n`
+        + `\n2. /info - show info about u\n`
+        + `\n3. /nsfw - get random nsfw picture hehe\n`
 
         await interaction.reply(embed('Hi~ My name is Arta ^^', description, true));
     } catch (error) {

@@ -4,6 +4,22 @@
         "description": "Show info about Arta"
     },
     {
+        "name": "nsfw",
+        "description": "get random NSFW picture"
+    },
+    {
+        "name": "info",
+        "description": "display info about user",
+        "options": [
+            {
+                "name": "user",
+                "description": "Pick User",
+                "type": 6,
+                "required": true
+            }
+        ]
+    },
+    {
         "name": "embed",
         "description": "Create a decoration message",
         "options": [
