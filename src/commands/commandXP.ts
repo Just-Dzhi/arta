@@ -1,10 +1,15 @@
-import { CommandInteraction, CommandInteractionOptionResolver, User } from 'discord.js';
+import { CommandInteraction, CommandInteractionOptionResolver, User, PermissionsBitField } from 'discord.js';
 import { getUser, updateUser } from '../database.js';
-import { ir, embed } from '../utils/utils.js';
+import { ir, embed, hasInteractionPermission } from '../utils/utils.js';
 import { logError } from '../utils/systemUtils.js';
 
 async function xp(interaction: CommandInteraction) {
     try {
+        if (!hasInteractionPermission(interaction, PermissionsBitField.Flags.Administrator)) {
+            await interaction.reply(ir('You do not have permission to use this command :(', true));
+            return;
+        };
+
         const options = interaction.options as CommandInteractionOptionResolver;
 
         const commandType = options.getSubcommand();
