@@ -1,4 +1,4 @@
-import { EmbedBuilder, TextChannel, CommandInteraction } from 'discord.js';
+import { EmbedBuilder, TextChannel, CommandInteraction, GuildEmoji, Collection } from 'discord.js';
 import { client } from '../client.js';
 
 function embed(title = 'title', description = 'description', ephemeral = false, thumbnail = client.user.avatarURL()) {
@@ -31,4 +31,9 @@ function hasInteractionPermission(interaction: CommandInteraction, permission: b
     return hasPermission(user.id, channel, permission);
 };
 
-export { embed, ir, hasInteractionPermission };
+const getGuildEmoji = (emojiString: string, guildEmojis: Collection<string, GuildEmoji>): GuildEmoji | null => {
+    let emojiName = emojiString.replace(/(:|<|>)/g, '');
+    return guildEmojis.find(e => e.name === emojiName) || null;
+};
+
+export { embed, ir, hasInteractionPermission, getGuildEmoji };

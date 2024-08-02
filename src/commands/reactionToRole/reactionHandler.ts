@@ -13,8 +13,8 @@ const updateRole = async (member: GuildMember, roleId: string, addRole: boolean)
                 await member.roles.add(role);
             } else {
                 await member.roles.remove(role);
-            }
-        }
+            };
+        };
     } catch (error) {
         logError(error, `Error ${addRole ? 'adding' : 'removing'} role ${roleId} to user ${member.user.tag}: ${error}`);
     };
@@ -24,7 +24,8 @@ const handleReaction = async (reaction: MessageReaction, user: User, addRole: bo
     if (user.bot || !reaction.message.guild) return;
 
     const reactionsConfig = loadReactionsConfig();
-    const roleId = reactionsConfig.messages[reaction.message.id]?.[reaction.emoji.name ?? ''];
+    const key = `:${reaction.emoji.name}:${reaction.emoji.id}`;
+    const roleId = reactionsConfig.messages[reaction.message.id]?.[key];
 
     if (roleId) {
         try {

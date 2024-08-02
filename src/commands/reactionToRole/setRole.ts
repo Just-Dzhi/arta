@@ -1,6 +1,6 @@
 import { CommandInteraction, CommandInteractionOptionResolver, TextChannel, PermissionsBitField } from 'discord.js';
 import { loadReactions, saveReactions } from './reactions.js';
-import { ir, hasInteractionPermission } from '../../utils/utils.js';
+import { ir, hasInteractionPermission, getGuildEmoji } from '../../utils/utils.js';
 import { logError } from '../../utils/systemUtils.js';
 
 const reactionsConfig = loadReactions();
@@ -13,7 +13,6 @@ const setRole = async (interaction: CommandInteraction): Promise<void> => {
         };
 
         const options = interaction.options as CommandInteractionOptionResolver;
-
         const messageId = options.getString('message_id');
         const emoji = options.getString('emoji');
         const role = options.getRole('role');
@@ -27,10 +26,18 @@ const setRole = async (interaction: CommandInteraction): Promise<void> => {
             reactionsConfig.messages[messageId] = {};
         };
 
-        const message = await (interaction.channel as TextChannel).messages.fetch(messageId);
-        await message.react(emoji);
+        const guildEmojis = interaction.guild.emojis.cache;
+        const foundEmoji = getGuildEmoji(emoji, guildEmojis);
 
-        reactionsConfig.messages[messageId][emoji] = role.id;
+        if (!foundEmoji) {
+            await interaction.reply(ir('Emoji not found in the guild', true));
+            return;
+        };
+
+        const message = await (interaction.channel as TextChannel).messages.fetch(messageId);
+        await message.react(':' + foundEmoji.name + ':' + foundEmoji.id);
+
+        reactionsConfig.messages[messageId][':' + foundEmoji.name + ':' + foundEmoji.id] = role.id;
         saveReactions(reactionsConfig);
 
         await interaction.reply(ir('Role set successfully', true));
