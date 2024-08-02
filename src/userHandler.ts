@@ -1,11 +1,11 @@
 import { client } from './client.js';
 import { GuildMember } from 'discord.js';
-import { addUser, deleteUser } from './database.js';
+import { User, addUser, deleteUser } from './database.js';
 import { logError } from './utils/systemUtils.js';
 
 client.on('guildMemberAdd', async (member: GuildMember) => {
     try {
-        const userData = {
+        const userData: User = {
             id: member.user.id,
             username: member.user.username,
             displayName: member.user.displayName,

@@ -81,4 +81,4 @@ const getAllUsers = (): User[] => {
     };
 };
 
-export { addUser, getUser, updateUser, deleteUser, getAllUsers };
+export { User, addUser, getUser, updateUser, deleteUser, getAllUsers };

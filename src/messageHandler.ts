@@ -1,7 +1,7 @@
 import { client, clientMention } from './client.js';
 import { handleModelResponse } from './model.js';
 import { Message } from 'discord.js';
-import { addUser, getUser, updateUser } from './database.js';
+import { User, addUser, getUser, updateUser } from './database.js';
 import { getRandomNumber, logError } from './utils/systemUtils.js';
 
 client.on('messageCreate', async (message: Message) => {
@@ -18,7 +18,7 @@ async function handleUserExperience(message: Message) {
     let user = getUser(message.author.id);
 
     if (!user) {
-        const newUser = {
+        const newUser: User = {
             id: message.author.id,
             username: message.author.username,
             displayName: message.author.displayName,
