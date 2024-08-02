@@ -69,5 +69,68 @@
     {
         "name": "clear_all_roles",
         "description": "Delete all roles from messages"
+    },
+    {
+        "name": "xp",
+        "description": "Manage user experience points",
+        "options": [
+            {
+                "name": "set",
+                "description": "Set user experience points",
+                "type": 1,
+                "options": [
+                    {
+                        "name": "target",
+                        "description": "The user",
+                        "type": 6,
+                        "required": true
+                    },
+                    {
+                        "name": "amount",
+                        "description": "The amount of XP",
+                        "type": 4,
+                        "required": true
+                    }
+                ]
+            },
+            {
+                "name": "add",
+                "description": "Add user experience points",
+                "type": 1,
+                "options": [
+                    {
+                        "name": "target",
+                        "description": "The user",
+                        "type": 6,
+                        "required": true
+                    },
+                    {
+                        "name": "amount",
+                        "description": "The amount of XP",
+                        "type": 4,
+                        "required": true
+                    }
+                ]
+            },
+            {
+                "name": "subtract",
+                "description": "Subtract user experience points",
+                "type": 1,
+                "options": [
+                    {
+                        "name": "target",
+                        "description": "The user",
+                        "type": 6,
+                        "required": true
+                    },
+                    {
+                        "name": "amount",
+                        "description": "The amount of XP",
+                        "type": 4,
+                        "required": true
+                    }
+                ]
+            }
+        ]
     }
 ]
