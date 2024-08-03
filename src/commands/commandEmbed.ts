@@ -29,7 +29,8 @@ async function createEmbed(interaction: CommandInteraction): Promise<void> {
                 return;
             };
             const guildEmojis = guild.emojis.cache;
-            const formattedDescription = await replaceEmojis(description, guildEmojis);
+
+            const formattedDescription = await replaceEmojis(description.replace(/\\n/g, '\n'), guildEmojis);
             await interaction.reply(embed(title, formattedDescription, ephemeral ?? false));
         } else {
             await interaction.reply(ir(`Title or description is missing!`, true));
