@@ -2,6 +2,7 @@
   "name": "arta",
   "version": "1.0.0",
   "description": "Simple discord bot with AI and commands ^^",
+  "repository": "https://github.com/Just-Dzhi/arta.git",
   "main": "main.js",
   "type": "module",
   "scripts": {

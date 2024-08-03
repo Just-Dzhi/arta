@@ -21,7 +21,7 @@ function initializeConversation(userId: string): void {
 function addUserMessage(userId: string, message: Message): void {
     conversationContexts[userId].push({
         role: "user",
-        content: `${message.author.displayName}: ${message.content.replace(/<@!?(\d+)>/g, '').trim()}`
+        content: `${message.content.replace(/<@!?(\d+)>/g, '').trim()}`
     });
 };
 

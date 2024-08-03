@@ -17,7 +17,8 @@ async function handleModelResponse(message: Message) {
         const text = await generateText({
             model: llamacpp.CompletionTextGenerator({
                 promptTemplate: llamacpp.prompt.ChatML,
-                stopSequences: ["<|stop|>"],
+                maxGenerationTokens: 1024,
+                stopSequences: ["# User", "# Assistant"],
             }).withChatPrompt(),
             prompt: {
                 system: fs.readFileSync('./src/modelPrompt.txt', 'utf-8'),
