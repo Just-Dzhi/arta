@@ -1,8 +1,10 @@
 /node_modules
 /dist
 /llama.cpp
+/llama
 *.gguf
 *.bat
+*.sh
 .env
 llama.log
 users.db
