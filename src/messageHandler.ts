@@ -12,10 +12,10 @@ client.on('messageCreate', async (message: Message) => {
         await handleModelResponse(message);
     };
 
-    await handleUserExperience(message);
+    await handleUserData(message);
 });
 
-async function handleUserExperience(message: Message) {
+async function handleUserData(message: Message) {
     let user = getUser(message.author.id);
 
     if (!user) {
@@ -26,6 +26,8 @@ async function handleUserExperience(message: Message) {
     if (user.displayName != message.author.displayName) {
         user.displayName = message.author.displayName;
     };
+
+    user.messageCount += 1;
 
     try {
         updateUser(user);

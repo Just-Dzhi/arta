@@ -12,7 +12,11 @@ async function info(interaction: CommandInteraction) {
         if (userData) {
             await interaction.reply(embed(
                 `${userData.displayName}`,
-                `XP: ${userData.xp}`, true,
+                `
+                | XP: ${userData.xp}
+                | Level: ${userData.level}
+                | Message Count: ${userData.messageCount}
+                `, true,
                 `${userData.avatarURL}`
             ));
         } else {

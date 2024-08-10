@@ -7,6 +7,8 @@ interface User {
     username: string;
     displayName: string;
     xp: number;
+    level: number;
+    messageCount: number,
     avatarURL: string;
 };
 
@@ -15,6 +17,8 @@ const userFields: Record<keyof User, string> = {
     username: 'TEXT',
     displayName: 'TEXT',
     xp: 'INTEGER',
+    level: 'INTEGER',
+    messageCount: 'INTEGER',
     avatarURL: 'TEXT'
 };
 
@@ -23,6 +27,18 @@ const createTableQuery = `CREATE TABLE IF NOT EXISTS users (
 )`;
 
 database.prepare(createTableQuery).run();
+
+const ensureUserFields = (): void => {
+    for (const [field, type] of Object.entries(userFields)) {
+        try {
+            database.prepare(`ALTER TABLE users ADD COLUMN ${field} ${type}`).run();
+        } catch (error) {
+            if (!error.message.includes('duplicate column name')) {
+                logError(error, `Error ensuring field ${field}`);
+            };
+        };
+    };
+};
 
 const addUser = (user: User): void => {
     const fields = Object.keys(userFields).join(', ');
@@ -49,6 +65,7 @@ const getUser = (id: string): User | null => {
 };
 
 const updateUser = (user: User): void => {
+    ensureUserFields();
     const assignments = Object.keys(userFields).map(field => `${field} = @${field}`).join(', ');
     const stmt = database.prepare(`UPDATE users SET ${assignments} WHERE id = @id`);
 

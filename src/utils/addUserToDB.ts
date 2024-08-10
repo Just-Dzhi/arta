@@ -11,6 +11,8 @@ function addUserToDB(userSource: any) {
             username: user.username,
             displayName: user.displayName,
             xp: getRandomNumber(1, 5),
+            level: 1,
+            messageCount: 0,
             avatarURL: user.displayAvatarURL(),
         };
 
