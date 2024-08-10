@@ -27,8 +27,12 @@ async function handleModelResponse(message: Message) {
         });
 
         clearInterval(typingInterval);
-        addAssistantMessage(userId, text);
-        message.reply(text);
+
+        const fetchedMessage = await message.channel.messages.fetch(message.id).catch(() => null);
+        if (fetchedMessage) {
+            addAssistantMessage(userId, text);
+            message.reply(text);
+        };
     } catch (error) {
         if (typingInterval) {
             clearInterval(typingInterval);

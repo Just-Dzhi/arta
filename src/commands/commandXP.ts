@@ -54,7 +54,7 @@ async function xp(interaction: CommandInteraction) {
         await interaction.reply(embed(
             `${target.displayName}'s Stats Updated`,
             `
-            | XP: ${userData.xp}
+            | XP: ${userData.xp} / ${userData.requiredXP}
             | Level: ${userData.level}
             `, true,
             `${target.displayAvatarURL()}`
