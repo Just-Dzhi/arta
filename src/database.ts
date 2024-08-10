@@ -7,6 +7,8 @@ interface User {
     username: string;
     displayName: string;
     xp: number;
+    requiredXP: number;
+    levelXP: number;
     level: number;
     messageCount: number,
     avatarURL: string;
@@ -17,6 +19,8 @@ const userFields: Record<keyof User, string> = {
     username: 'TEXT',
     displayName: 'TEXT',
     xp: 'INTEGER',
+    requiredXP: 'INTEGER',
+    levelXP: 'INTEGER',
     level: 'INTEGER',
     messageCount: 'INTEGER',
     avatarURL: 'TEXT'

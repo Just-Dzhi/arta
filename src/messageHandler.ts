@@ -4,6 +4,7 @@ import { Message } from 'discord.js';
 import { getUser, updateUser } from './database.js';
 import { getRandomNumber, logError } from './utils/systemUtils.js';
 import { addUserToDB } from './utils/addUserToDB.js';
+import { handleLevelUpOrDown } from './utils/utils.js';
 
 client.on('messageCreate', async (message: Message) => {
     if (message.author.id === client.user?.id) return;
@@ -28,6 +29,7 @@ async function handleUserData(message: Message) {
     };
 
     user.messageCount += 1;
+    user = handleLevelUpOrDown(user);
 
     try {
         updateUser(user);

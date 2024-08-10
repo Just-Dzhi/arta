@@ -13,7 +13,7 @@ async function info(interaction: CommandInteraction) {
             await interaction.reply(embed(
                 `${userData.displayName}`,
                 `
-                | XP: ${userData.xp}
+                | XP: ${userData.xp} / ${userData.requiredXP}
                 | Level: ${userData.level}
                 | Message Count: ${userData.messageCount}
                 `, true,

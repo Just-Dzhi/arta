@@ -1,6 +1,6 @@
 import { CommandInteraction, CommandInteractionOptionResolver, User, PermissionsBitField } from 'discord.js';
 import { getUser, updateUser } from '../database.js';
-import { ir, embed, hasInteractionPermission } from '../utils/utils.js';
+import { ir, embed, hasInteractionPermission, handleLevelUpOrDown } from '../utils/utils.js';
 import { logError } from '../utils/systemUtils.js';
 
 async function xp(interaction: CommandInteraction) {
@@ -26,7 +26,7 @@ async function xp(interaction: CommandInteraction) {
             return;
         };
 
-        const userData = getUser(target.id);
+        let userData = getUser(target.id);
 
         if (!userData) {
             await interaction.reply(ir('User data not found in the database.', true));
@@ -48,11 +48,15 @@ async function xp(interaction: CommandInteraction) {
                 return;
         };
 
+        userData = handleLevelUpOrDown(userData);
         updateUser(userData);
 
         await interaction.reply(embed(
-            `${target.displayName}'s XP Updated`,
-            `New XP: ${userData.xp}`, true,
+            `${target.displayName}'s Stats Updated`,
+            `
+            | XP: ${userData.xp}
+            | Level: ${userData.level}
+            `, true,
             `${target.displayAvatarURL()}`
         ));
     } catch (error) {

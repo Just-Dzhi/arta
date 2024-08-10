@@ -1,4 +1,5 @@
 import { EmbedBuilder, TextChannel, CommandInteraction, GuildEmoji, Collection } from 'discord.js';
+import { User } from '../database.js';
 import { client } from '../client.js';
 
 function embed(title = 'title', description = 'description', ephemeral = false, thumbnail = client.user.avatarURL()) {
@@ -36,4 +37,22 @@ const getGuildEmoji = (emojiString: string, guildEmojis: Collection<string, Guil
     return guildEmojis.find(e => e.name === emojiName) || null;
 };
 
-export { embed, ir, hasInteractionPermission, getGuildEmoji };
+function handleLevelUpOrDown(user: User): User {
+    while (user.xp >= user.requiredXP) {
+        user.xp -= user.requiredXP;
+        user.levelXP += user.requiredXP;
+        user.level += 1;
+        user.requiredXP = Math.floor(user.requiredXP * 1.1);
+    };
+
+    while (user.xp < 0 && user.level > 1) {
+        user.level -= 1;
+        user.levelXP -= user.requiredXP;
+        user.requiredXP = Math.floor(user.requiredXP / 1.1);
+        user.xp += user.requiredXP;
+    };
+
+    return user;
+};
+
+export { embed, ir, hasInteractionPermission, getGuildEmoji, handleLevelUpOrDown };
