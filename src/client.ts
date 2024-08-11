@@ -1,6 +1,7 @@
 import { Client, IntentsBitField, Message } from 'discord.js';
+import 'dotenv/config';
 
-const clientName: string[] = ['Arta', 'Арта'];
+const clientName: string[] = (process.env.DISCORD_CLIENT_NAME || '').split(',').map(name => name.trim());
 
 const client = new Client({
     intents: [
@@ -13,6 +14,7 @@ const client = new Client({
 });
 
 function clientMention(message: Message, client: Client): boolean {
+    console.log(clientName);
     return !message.mentions.everyone && !message.author.bot &&
     (message.mentions.has(client.user!.id) || clientName.some(name => message.content.toLowerCase().includes(name)));
 };

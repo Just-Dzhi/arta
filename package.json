@@ -10,7 +10,7 @@
     "launch": "node ./dist/main.js",
     "start": "yarn build && yarn launch",
     "register": "node ./dist/commands/registerCommands.js",
-    "serve": "start start.sh"
+    "serve": "start start.bat"
   },
   "author": "G",
   "license": "MIT",
