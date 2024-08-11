@@ -132,5 +132,62 @@
                 ]
             }
         ]
+    },
+    {
+        "name": "player",
+        "description": "Music player controls",
+        "options": [
+            {
+                "name": "play",
+                "description": "Play a song from YouTube",
+                "type": 1,
+                "options": [
+                    {
+                        "name": "query",
+                        "description": "The song name or URL",
+                        "type": 3,
+                        "required": true
+                    }
+                ]
+            },
+            {
+                "name": "skip",
+                "description": "Skip the currently playing song",
+                "type": 1
+            },
+            {
+                "name": "stop",
+                "description": "Stop the music and clear the queue",
+                "type": 1
+            },
+            {
+                "name": "pause",
+                "description": "Pause the currently playing song",
+                "type": 1
+            },
+            {
+                "name": "resume",
+                "description": "Resume the paused song",
+                "type": 1
+            },
+            {
+                "name": "queue",
+                "description": "Display the current song queue",
+                "type": 1
+            },
+            {
+                "name": "remove",
+                "description": "Remove a song from the queue",
+                "type": 1,
+                "options": [
+                    {
+                        "name": "position",
+                        "description": "The position of the song in the queue",
+                        "type": 4,
+                        "required": true
+                    }
+                ]
+            }
+        ]
     }
 ]
